@@ -24,15 +24,26 @@ var trailingZeroes = function (n) {
   var zeroCount = 0;
   var currentMultiple = 5;
   while (n >= currentMultiple) {
-    zeroCount += (n / currentMultiple);
+    zeroCount += Math.floor(n / currentMultiple);
     currentMultiple *= 5;
   }
   return zeroCount;
 }
 
+var trailingZeroes = function (n) {
+  var zeroCount = 0;
+  while(n > 0){
+    n = Math.floor(n / 5);
+    zeroCount += n;
+  }
+  return zeroCount;
+}
+
+
 trailingZeroes(40)
 trailingZeroes(4)
 trailingZeroes(5)
+trailingZeroes(8)
 trailingZeroes(6)
 trailingZeroes(11)
 trailingZeroes(21)
