@@ -28,6 +28,23 @@ var isPalindrome = function (head) {
   return true;
 };
 
+// 利用栈，优雅代码
+var isPalindrome = function (head) {
+  const stack = [];
+  let headTmp = head;
+  while (headTmp) {
+    stack.push(headTmp.val)
+    headTmp = headTmp.next;
+  }
+  while (head) {
+    let nodeVal = stack.pop();
+    if (head.val !== nodeVal) {
+      return false;
+    }
+    head = head.next;
+  }
+  return true;
+};
 
 // isPalindrome(new ListNode(1, new ListNode(2, new ListNode(1, new ListNode(2, new ListNode(1))))));
 // isPalindrome(new ListNode(1, new ListNode(2, new ListNode(2, new ListNode(1)))));
