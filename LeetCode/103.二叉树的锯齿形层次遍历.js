@@ -77,6 +77,47 @@ var zigzagLevelOrder = function (root) {
   return result;
 };
 
+// 稍优雅
+var zigzagLevelOrder = function (root) {
+  if (!root) return [];
+  const queue = [root];
+  const depth = [1];
+  let lastDepth = 0;
+  const result = [];
+  let item = [];
+  let arrow = false;
+  while (queue.length > 0) {
+    const cDepth = depth.pop();
+    root = queue.pop();
+    if (cDepth !== lastDepth) {
+      if (item.length > 0) {
+        result.push(item);
+      }
+      item = [root.val];
+      lastDepth = cDepth;
+      arrow = !arrow;
+    } else {
+      if (arrow) {
+        item.push(root.val);
+      } else {
+        item.unshift(root.val)
+      }
+    }
+    if (root.left) {
+      queue.unshift(root.left)
+      depth.unshift(cDepth + 1)
+    }
+    if (root.right) {
+      queue.unshift(root.right)
+      depth.unshift(cDepth + 1)
+    }
+  }
+  if (item.length > 0) {
+    result.push(item);
+  }
+  return result;
+};
+
 
 
 function TreeNode(val, left = null, right = null) {
